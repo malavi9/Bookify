@@ -10,20 +10,28 @@
                 <div class="theme-search-area-section-inner">
                   <i class="theme-search-area-section-icon lin lin-location-pin"></i>
 
-                  <!--<input class="" type="text" -->
-                  <!--data-provide="typeahead">-->
+                  <input
+                    (focus)="setData($event)"
+                    (keyup)="setData($event)"
+                    (blur)="onBlur()"
+                    autofocus
+                    class="theme-search-area-section-input typeahead"
+                    type="text"
+                    value=""
+                    data-provide="typeahead">
 
-                  <input [(ngModel)]="selected"
-                         [typeahead]="states"
-                         (keydown)="setData($event)"
-                         placeholder="Departure"
-                         class="theme-search-area-section-input typeahead">
-
-
-                  <!--<ul class="typeahead dropdown-menu" role="listbox" style="top: 55px; left: 0px; display: block;">-->
-                  <!--<li class=""><a class="dropdown-item" href="#" role="option">Istachatta, FL, United States</a></li>-->
-                  <!--<li class=""><a class="dropdown-item" href="#" role="option">Istanbul, IB, Turkey</a></li>-->
-                  <!--</ul>-->
+                  <ul class="typeahead dropdown-menu" role="listbox" [class.hidden]="!airportDepartureBool"
+                      style="top: 55px; left: 0px; display: block; width: auto;">
+                    <li *ngFor="let airport of airportData;" class="" (click)="setDepAirport($event)">
+                      <a (click)="setDepAirport($event)"
+                         class="dropdown-item"
+                         [attr.code]="airport.code" >
+                        {{airport.code}} -
+                        {{airport.name}} -
+                        {{airport.country_name}}
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>

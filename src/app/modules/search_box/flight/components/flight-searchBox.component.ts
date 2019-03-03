@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
+import {Data} from '@angular/router';
+import {getType} from '@angular/core/src/errors';
 
 @Component({
   selector: 'app-flight-search-box',
@@ -9,76 +12,48 @@ import {HttpClient} from '@angular/common/http';
 
 export class FlightSearchBoxComponent {
 
-  selected: string;
-  states: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Dakota',
-    'North Carolina',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming'
-  ];
+  public airportData: any[] = [];
+  public airportDepartureBool: boolean = false;
+  public From;
 
   constructor(private httpClient: HttpClient) {
   }
 
+  /**
+   * set airport list
+   * @param e
+   */
   setData(e) {
-    var depLenght = e.target.value.length;
-    var params = {
-      username: 'a.amini',
-      password: '123456'
-    };
-    let formData = new FormData();
-    formData.append('username', 'a.amini');
-    formData.append('password', '123456');
+    var from = e.target.value;
 
-    if (depLenght >= 3) {
-      this.httpClient.post('http://e-wallet-online.com/api/v1/auth/get-token', formData);
-        // .subscribe((data: any )=>);
+    var params = new HttpParams().set('from', from);
+    if (e.target.value.length > 2) {
+      this.httpClient.get('http://e-wallet-online.com/api/v1/airport/search', {params})
+        .subscribe((data: any) => {
+          if (data['output'] == null) {
+            console.log('asd');
+            this.airportDepartureBool = false;
+            this.airportData = [];
+          } else {
+            this.airportData = data['output']['airports'];
+            this.airportDepartureBool = true;
+          }
+        });
     }
+  }
+
+  /**
+   * hidden Airport list
+   * return void;
+   */
+  onBlur() {
+    // this.airportDepartureBool = false;
+  }
+
+  setDepAirport(e) {
+    // let target = e.source.selected._element.nativeElement;
+    // console.log(target.getAttribute('code'));
+    // console.log(e.data);
+    // this.From=;
   }
 }
