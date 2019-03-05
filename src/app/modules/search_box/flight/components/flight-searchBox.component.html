@@ -11,6 +11,7 @@
                   <i class="theme-search-area-section-icon lin lin-location-pin"></i>
 
                   <input
+                    [(ngModel)]="departureLabel"
                     (focus)="setData($event)"
                     (keyup)="setData($event)"
                     (blur)="onBlur()"
@@ -22,13 +23,16 @@
 
                   <ul class="typeahead dropdown-menu" role="listbox" [class.hidden]="!airportDepartureBool"
                       style="top: 55px; left: 0px; display: block; width: auto;">
-                    <li *ngFor="let airport of airportData;" class="" (click)="setDepAirport($event)">
-                      <a (click)="setDepAirport($event)"
+                    <li *ngFor="let airport of airportData;" class="" [attr.data-code]="airport.code" (click)="setDepAirport($event)">
+                      <a
                          class="dropdown-item"
-                         [attr.code]="airport.code" >
-                        {{airport.code}} -
-                        {{airport.name}} -
-                        {{airport.country_name}}
+                         >
+                        <span>
+                          {{airport.name}} -
+                          {{airport.country_name}}
+                        </span><br>
+                        <small><b>({{airport.code}})</b></small>
+
                       </a>
                     </li>
                   </ul>

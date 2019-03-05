@@ -15,6 +15,7 @@ export class FlightSearchBoxComponent {
   public airportData: any[] = [];
   public airportDepartureBool: boolean = false;
   public From;
+  public departureLabel = '';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -31,7 +32,6 @@ export class FlightSearchBoxComponent {
       this.httpClient.get('http://e-wallet-online.com/api/v1/airport/search', {params})
         .subscribe((data: any) => {
           if (data['output'] == null) {
-            console.log('asd');
             this.airportDepartureBool = false;
             this.airportData = [];
           } else {
@@ -51,9 +51,12 @@ export class FlightSearchBoxComponent {
   }
 
   setDepAirport(e) {
-    // let target = e.source.selected._element.nativeElement;
-    // console.log(target.getAttribute('code'));
-    // console.log(e.data);
-    // this.From=;
+    // Todo Get the code attribute in the best way
+
+    this.From = e['path'][2]['dataset']['code'];
+
+    this.departureLabel = e['path'][2]['innerText'];
+    this.airportDepartureBool = false;
+
   }
 }
