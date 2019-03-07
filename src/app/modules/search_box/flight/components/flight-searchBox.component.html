@@ -21,12 +21,12 @@
                     value=""
                     data-provide="typeahead">
 
-                  <ul class="typeahead dropdown-menu" role="listbox" [class.hidden]="!airportDepartureBool"
+                  <ul #depAirportList class="typeahead dropdown-menu" role="listbox" [class.hidden]="!airportDepartureBool"
                       style="top: 55px; left: 0px; display: block; width: auto;">
-                    <li *ngFor="let airport of airportData;" class="" [attr.data-code]="airport.code" (click)="setDepAirport($event)">
+                    <li *ngFor="let airport of depAirportData;" class="active" [attr.data-code]="airport.code"
+                        (click)="setDepAirport($event)">
                       <a
-                         class="dropdown-item"
-                         >
+                        class="dropdown-item">
                         <span>
                           {{airport.name}} -
                           {{airport.country_name}}
@@ -44,8 +44,29 @@
                 class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-fade-white">
                 <div class="theme-search-area-section-inner">
                   <i class="theme-search-area-section-icon lin lin-location-pin"></i>
-                  <input class="theme-search-area-section-input typeahead" type="text" placeholder="Arrival"
-                         data-provide="typeahead">
+                  <input
+                    (keyup)="setArrivalAirport($event)"
+                    [(ngModel)]="arrivalLabel"
+                    class="theme-search-area-section-input typeahead"
+                    type="text"
+                    placeholder="Arrival"
+                    data-provide="typeahead">
+                  <ul class="typeahead dropdown-menu" role="listbox" [class.hidden]="!airportArrivalBool"
+                      style="top: 55px; left: 0px; display: block; width: auto;">
+                    <li *ngFor="let airport of arrAirportData;" class="" [attr.data-code]="airport.code"
+                        (click)="setArrAirport($event)">
+                      <a
+                        class="dropdown-item">
+                        <span>
+                          {{airport.name}} -
+                          {{airport.country_name}}
+                        </span><br>
+                        <small><b>({{airport.code}})</b></small>
+
+                      </a>
+                    </li>
+                  </ul>
+
                 </div>
               </div>
             </div>
