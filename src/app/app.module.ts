@@ -2,11 +2,19 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
+import {SearchBoxModule} from './modules/search_box/searchBox.module';
+import {FlightModule} from './modules/flight/flight.module';
+
 import {AppComponent} from './app.component';
 import {BodyComponent} from './components/layouts/body/body.component';
 import {HeaderComponent} from './components/layouts/header/header.component';
 import {FooterComponent} from './components/layouts/footer/footer.component';
-import {SearchBoxModule} from './modules/search_box/searchBox.module';
+import {RouterModule, Routes} from '@angular/router';
+
+
+const appRoute: Routes = [
+  {path: '', component: BodyComponent}
+];
 
 
 @NgModule({
@@ -14,12 +22,14 @@ import {SearchBoxModule} from './modules/search_box/searchBox.module';
     AppComponent,
     HeaderComponent,
     BodyComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SearchBoxModule
+    SearchBoxModule,
+    FlightModule,
+    RouterModule.forRoot(appRoute)
   ],
   providers: [],
   bootstrap: [AppComponent]
