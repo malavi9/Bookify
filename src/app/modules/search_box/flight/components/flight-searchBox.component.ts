@@ -1,7 +1,8 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
-import {forEach} from '@angular/router/src/utils/collection';
+import {RouterLink} from '@angular/router';
+
 
 @Component({
   selector: 'app-flight-search-box',
@@ -15,6 +16,7 @@ export class FlightSearchBoxComponent {
   public arrAirportData: any[] = [];
   public airportDepartureBool: boolean = false;
   public airportArrivalBool: boolean = false;
+  public depDate:string='2019-03-20'
   public From;
   public To;
   public departureLabel = '';
@@ -73,6 +75,7 @@ export class FlightSearchBoxComponent {
   setDepAirport(e, t) {
     // Todo Get the code attribute in the best way
     this.From = e['path'][2]['dataset']['code'];
+    console.log(e['path'][2]['dataset']['code']);
     this.departureLabel = e['path'][2]['innerText'];
     this.airportDepartureBool = false;
 
@@ -90,8 +93,9 @@ export class FlightSearchBoxComponent {
     var to = e.target.value;
     console.log(to);
     var params = new HttpParams().set('from', this.From).set('to', to);
+    var header = new HttpHeaders({'content-type': 'application/json; charset=UTF-8'});
     if (e.target.value.length > 2) {
-      this.httpClient.get('http://e-wallet-online.com/api/v1/airport/search', {params})
+      this.httpClient.get('http://e-wallet-online.com/api/v1/airport/search', {headers: header, params: params})
         .subscribe((data: any) => {
           console.log(data);
           if (data['output'] == null) {
@@ -103,5 +107,9 @@ export class FlightSearchBoxComponent {
           }
         });
     }
+  }
+
+  submitForm(){
+    console.log('teete');
   }
 }

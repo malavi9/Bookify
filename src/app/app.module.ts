@@ -6,14 +6,14 @@ import {SearchBoxModule} from './modules/search_box/searchBox.module';
 import {FlightModule} from './modules/flight/flight.module';
 
 import {AppComponent} from './app.component';
-import {BodyComponent} from './components/layouts/body/body.component';
+import {HomeComponent} from './components/layouts/home/home.component';
 import {HeaderComponent} from './components/layouts/header/header.component';
 import {FooterComponent} from './components/layouts/footer/footer.component';
 import {RouterModule, Routes} from '@angular/router';
 
 
 const appRoute: Routes = [
-  {path: '', component: BodyComponent}
+  {path: '', component: HomeComponent}
 ];
 
 
@@ -21,7 +21,7 @@ const appRoute: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    BodyComponent,
+    HomeComponent,
     FooterComponent,
   ],
   imports: [
