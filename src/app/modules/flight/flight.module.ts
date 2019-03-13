@@ -6,7 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 
 const appRoute: Routes = [
-  {path: 'flight/search', component: SearchResultComponent}
+  {path: 'flight/search', component: SearchResultComponent, data: {animation: 'FilterPage'}}
 ];
 
 

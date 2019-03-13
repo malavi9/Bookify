@@ -15,13 +15,14 @@
                     (focus)="setData($event)"
                     (keyup)="setData($event)"
                     (blur)="onBlur()"
-                    autofocus
+                    placeholder="Origin"
                     class="theme-search-area-section-input typeahead"
                     type="text"
                     value=""
                     data-provide="typeahead">
 
-                  <ul #depAirportList class="typeahead dropdown-menu" role="listbox" [class.hidden]="!airportDepartureBool"
+                  <ul #depAirportList class="typeahead dropdown-menu" role="listbox"
+                      [class.hidden]="!airportDepartureBool"
                       style="top: 55px; left: 0px; display: block; width: auto;">
                     <li *ngFor="let airport of depAirportData;" class="active" [attr.data-code]="airport.code"
                         (click)="setDepAirport($event)">
@@ -95,8 +96,10 @@
                 class="theme-search-area-section theme-search-area-section-curved theme-search-area-section-fade-white">
                 <div class="theme-search-area-section-inner">
                   <i class="theme-search-area-section-icon lin lin-calendar"></i>
-                  <input class="theme-search-area-section-input datePickerEnd _mob-h" value="Mon 07/02" type="text"
-                         placeholder="Check-out">
+                  <input
+                    [(ngModel)]="arrDate"
+                    disabled class="theme-search-area-section-input datePickerEnd _mob-h" type="text"
+                    placeholder="Check-out">
                   <input class="theme-search-area-section-input _desk-h mobile-picker" value="2018-07-02"
                          type="date">
                 </div>

@@ -8,4 +8,7 @@ import {Component} from '@angular/core';
 
 export class SearchResultComponent {
 
+  ngOnInit() {
+    console.log('asdffffffff');
+  }
 }

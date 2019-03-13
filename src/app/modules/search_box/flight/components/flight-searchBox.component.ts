@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
-import {RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -16,15 +16,19 @@ export class FlightSearchBoxComponent {
   public arrAirportData: any[] = [];
   public airportDepartureBool: boolean = false;
   public airportArrivalBool: boolean = false;
-  public depDate:string='2019-03-20'
-  public From;
-  public To;
+  public depDate: string = '2019-03-20';
+  public arrDate: string = '';
+  public From: string;
+  public To: string;
+  public Adult: number = 1;
+  public Child: number;
+  public Infant: number;
   public departureLabel = '';
   public arrivalLabel = '';
   @ViewChild('depAirportList') deplist: ElementRef;
 
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   /**
@@ -35,14 +39,15 @@ export class FlightSearchBoxComponent {
 
   setData(e) {
     //TODO add service fo airport Search
-    var from = e.target.value;
-    var element: HTMLElement;
-    var params = new HttpParams().set('from', from);
+    let from = e.target.value;
+    let element: HTMLElement;
+    let params = new HttpParams().set('from', from);
+
     if (e.target.value.length > 2) {
       this.httpClient.get('http://e-wallet-online.com/api/v1/airport/search', {params})
         .subscribe((data: any) => {
           if (data['output'] == null) {
-            this.airportDepartureBool = false;
+            this.airportDepartureBool  = false;
             this.depAirportData = [];
           } else {
             this.depAirportData = data['output']['airports'];
@@ -109,7 +114,20 @@ export class FlightSearchBoxComponent {
     }
   }
 
-  submitForm(){
-    console.log('teete');
+  submitForm() {
+    this.router.navigate(['flight/search'], this.getQueryParams());
+  }
+
+  getQueryParams() {
+    return {
+      queryParams: {
+        from: this.From,
+        to: this.To,
+        departureDate: this.depDate,
+        adult: this.Adult,
+        child: this.Child,
+        infant: this.Infant
+      }
+    };
   }
 }
