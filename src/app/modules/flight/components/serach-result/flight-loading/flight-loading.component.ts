@@ -8,15 +8,12 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 
 export class FlightLoadingComponent implements OnInit {
-  @Input() enabled: string;
 
-  public loadingVisible: any;
 
   constructor() {
 
   }
 
   ngOnInit(): void {
-    this.loadingVisible = this.enabled;
   }
 }

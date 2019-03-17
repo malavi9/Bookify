@@ -400,7 +400,9 @@
 
 
         <!--loading-component-->
-        <app-flight-loading [enabled]="loadingEnabled"></app-flight-loading>
+        <div *ngIf="loadingEnabled" (click)="test()">
+          <app-flight-loading></app-flight-loading>
+        </div>
         <!--loading-component-->
 
         <div class="search-result">

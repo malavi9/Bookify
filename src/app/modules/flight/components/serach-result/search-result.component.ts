@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {load} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-search-result',
@@ -6,9 +7,22 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./search-result.component.css']
 })
 
-export class SearchResultComponent{
-  public loadingEnabled: any = true;
+export class SearchResultComponent {
+  public loadingEnabled: boolean = true;
 
-  ngOnInit() {
+  constructor() {
+
+  }
+
+  public loading(value: boolean = true) {
+    this.loadingEnabled = value;
+  }
+
+  ngDoCheck() {
+
+  }
+
+  public server() {
+
   }
 }

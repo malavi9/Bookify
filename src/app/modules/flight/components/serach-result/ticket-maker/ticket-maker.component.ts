@@ -12,4 +12,6 @@ export class TicketMakerComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
 }
