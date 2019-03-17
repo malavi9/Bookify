@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
-import {SearchBoxModule} from './modules/search_box/searchBox.module';
+import {Search_boxModule} from './modules/search_box/search_box.module';
 import {FlightModule} from './modules/flight/flight.module';
 
 import {AppComponent} from './app.component';
@@ -27,7 +27,7 @@ const appRoute: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SearchBoxModule,
+    Search_boxModule,
     FlightModule,
     RouterModule.forRoot(appRoute)
   ],

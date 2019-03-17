@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {SearchResultComponent} from './components/serachResult/searchResult.component';
+import {SearchResultComponent} from './components/serach-result/search-result.component';
 import {RouterModule, Routes} from '@angular/router';
+import {FlightLoadingComponent} from './components/serach-result/flight-loading/flight-loading.component';
+import { TicketMakerComponent } from './components/serach-result/ticket-maker/ticket-maker.component';
 
 
 const appRoute: Routes = [
@@ -12,7 +14,7 @@ const appRoute: Routes = [
 
 @NgModule({
   declarations: [
-    SearchResultComponent
+    SearchResultComponent, FlightLoadingComponent, TicketMakerComponent
   ],
   imports: [
     BrowserModule,

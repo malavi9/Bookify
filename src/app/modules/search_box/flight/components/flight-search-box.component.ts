@@ -6,8 +6,8 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-flight-search-box',
-  templateUrl: './flight-searchBox.component.html',
-  styleUrls: ['./flight-searchBox.component.scss']
+  templateUrl: './flight-search-box.component.html',
+  styleUrls: ['./flight-search-box.component.scss']
 })
 
 export class FlightSearchBoxComponent {
