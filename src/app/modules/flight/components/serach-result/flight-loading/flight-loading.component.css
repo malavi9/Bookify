@@ -1,0 +1,8 @@
+.flight-loading {
+  margin: 0 auto;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  float: none;
+}
