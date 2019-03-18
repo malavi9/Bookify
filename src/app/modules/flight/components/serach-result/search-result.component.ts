@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {load} from '@angular/core/src/render3';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-search-result',
@@ -10,7 +10,7 @@ import {load} from '@angular/core/src/render3';
 export class SearchResultComponent {
   public loadingEnabled: boolean = true;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
 
   }
 
@@ -18,11 +18,33 @@ export class SearchResultComponent {
     this.loadingEnabled = value;
   }
 
-  ngDoCheck() {
-
+  ngOnInit() {
+    console.log('te');
+    this.getData();
   }
 
-  public server() {
+  public getData() {
+    const headers = new HttpHeaders({'content-type': 'application/json; charset=utf8'});
+    let body = JSON.stringify({
+      request_id: '',
+      params: {
+        from: 'LHR',
+        to: 'DXB',
+        date: {
+          from: '2019-04-24'
+        }
+      }
+    });
+
+
+    this.httpClient.post('http://ebo.loc/api/v1/flight/search', body, {headers: headers})
+      .subscribe((data: any) => {
+        if (data['output']) {
+          if (data['output']['count'] > 0) {
+            
+          }
+        }
+      });
 
   }
 }
