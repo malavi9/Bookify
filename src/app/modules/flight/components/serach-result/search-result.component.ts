@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {TicketMakerServiceService} from '../../../../services/flight/ticket-maker-service/ticket-maker-service.service';
 
 @Component({
   selector: 'app-search-result',
@@ -8,9 +9,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 
 export class SearchResultComponent {
-  public loadingEnabled: boolean = true;
 
-  constructor(private httpClient: HttpClient) {
+  public loadingEnabled: boolean = true;
+  public ticketMaker: boolean = false;
+  public flights: Array;
+
+
+  constructor(private httpClient: HttpClient, private ticketMakerService: TicketMakerServiceService) {
 
   }
 
@@ -41,10 +46,17 @@ export class SearchResultComponent {
       .subscribe((data: any) => {
         if (data['output']) {
           if (data['output']['count'] > 0) {
-            
+            this.chopFlights(data['output']['flights']);
           }
         }
       });
 
+  }
+
+  public chopFlights(flights: Array) {
+    this.ticketMaker = true;
+    this.flights = flights;
+    this.ticketMakerService.chopFlight(flights);
+    this.loadingEnabled = false;
   }
 }

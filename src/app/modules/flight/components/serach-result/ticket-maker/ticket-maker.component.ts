@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-ticket-maker',
@@ -6,12 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ticket-maker.component.scss']
 })
 export class TicketMakerComponent implements OnInit {
+  @Input() Flights: Array;
+  public flight: Array;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
 
+  ngOnInit(): void {
+    this.flight = this.Flights;
+    console.log(this.Flights);
+  }
 
 
 }
