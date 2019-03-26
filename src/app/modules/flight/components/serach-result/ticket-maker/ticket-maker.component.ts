@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TicketMakerComponent implements OnInit {
   @Input() Flights: Array<string>;
   public flight: Array<string>;
+  public isCollapsed: boolean = false;
 
   constructor() {
   }

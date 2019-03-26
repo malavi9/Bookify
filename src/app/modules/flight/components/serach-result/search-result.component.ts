@@ -10,6 +10,7 @@ import {TicketMakerServiceService} from '../../../../services/flight/ticket-make
 
 export class SearchResultComponent {
 
+  public isCollapsed: boolean = true;
   public loadingEnabled: boolean = true;
   public ticketMaker: boolean = false;
   public flights: Array<string>;

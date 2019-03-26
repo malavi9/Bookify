@@ -2,8 +2,11 @@
   *ngFor="let flg of Flights"
   class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
   <div class="theme-search-results-item-preview">
-    <!--<a class="theme-search-results-item-mask-link collapsed" href="#searchResultsItem-3" role="button"-->
-    <!--data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-3"></a>-->
+    <a
+      (click)="flg.index = !flg.index"
+      [attr.aria-expanded]="!flg.index"
+      aria-controls="collapseExample2"
+      class="theme-search-results-item-mask-link collapsed"></a>
     <div class="row" data-gutter="20">
       <div class="col-md-10 ">
         <div class="theme-search-results-item-flight-sections">
@@ -50,7 +53,8 @@
                           <i class="fa fa-plane theme-search-results-item-flight-section-path-icon"></i>
                           <div
                             class="theme-search-results-item-flight-section-path-line-dot"></div>
-                          <div class="theme-search-results-item-flight-section-path-line-title">{{flg.legs[0].arrivalAirport}} </div>
+                          <div
+                            class="theme-search-results-item-flight-section-path-line-title">{{flg.legs[0].arrivalAirport}} </div>
                         </div>
 
 
@@ -93,12 +97,16 @@
       </div>
     </div>
   </div>
-  
-  <div class="theme-search-results-item-collapse collapse" id="searchResultsItem-3" aria-expanded="false"
-       style="height: 0px;">
+
+  <div
+    [ngbCollapse]="flg.index"
+    class="theme-search-results-item-collapse collapse">
     <div class="theme-search-results-item-extend">
-      <a class="theme-search-results-item-extend-close collapsed" href="#searchResultsItem-3" role="button"
-         data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-3">✕</a>
+      <a
+        (click)="flg.index = !flg.index"
+        [attr.aria-expanded]="!flg.index"
+        class="theme-search-results-item-extend-close collapsed"
+        data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-3">✕</a>
       <div class="theme-search-results-item-extend-inner">
         <div class="theme-search-results-item-flight-detail-items">
           <div class="theme-search-results-item-flight-details">
@@ -106,111 +114,63 @@
               <div class="col-md-3 ">
                 <div class="theme-search-results-item-flight-details-info">
                   <h5 class="theme-search-results-item-flight-details-info-title">Depart</h5>
-                  <p class="theme-search-results-item-flight-details-info-date">Tue, May 17</p>
-                  <p class="theme-search-results-item-flight-details-info-cities">London → New York</p>
-                  <p class="theme-search-results-item-flight-details-info-fly-time">19h 0m</p>
-                  <p class="theme-search-results-item-flight-details-info-stops">1 stop</p>
+                  <p class="theme-search-results-item-flight-details-info-date">{{flg.routing.dateLongStr}}</p>
+                  <p class="theme-search-results-item-flight-details-info-cities">
+                    {{flg.routing.departure.airport.code}}
+                    →
+                    {{flg.routing.arrival.airport.code}}</p>
+                  <p class="theme-search-results-item-flight-details-info-fly-time">
+                    {{flg.duration.hours}}h
+                    {{flg.duration.minutes}}m</p>
+                  <p class="theme-search-results-item-flight-details-info-stops">{{flg.stops}} stop</p>
                 </div>
               </div>
               <div class="col-md-9 ">
                 <div class="theme-search-results-item-flight-details-schedule">
                   <ul class="theme-search-results-item-flight-details-schedule-list">
-                    <li>
+                    <li *ngFor="let route of flg.legs">
                       <i class="fa fa-plane theme-search-results-item-flight-details-schedule-icon"></i>
                       <div class="theme-search-results-item-flight-details-schedule-dots"></div>
-                      <p class="theme-search-results-item-flight-details-schedule-date">Tue, May 17</p>
+                      <p class="theme-search-results-item-flight-details-schedule-date">
+                        {{route.departureTime}}
+                      </p>
                       <div class="theme-search-results-item-flight-details-schedule-time">
-                                      <span class="theme-search-results-item-flight-details-schedule-time-item">01:20
-                                        <span>pm</span>
+                                      <span class="theme-search-results-item-flight-details-schedule-time-item">
+                                        {{route.departureTime}}
+                                        {{route.departureTimef}}
+                                        <!--                                        <span>pm</span>-->
                                       </span>
                         <span
                           class="theme-search-results-item-flight-details-schedule-time-separator">—</span>
-                        <span class="theme-search-results-item-flight-details-schedule-time-item">12:30
-                                        <span>pm</span>
+                        <span class="theme-search-results-item-flight-details-schedule-time-item">
+                          {{route.arrivalTime}}
+                          <!--                                        <span>pm</span>-->
                                       </span>
                       </div>
-                      <p class="theme-search-results-item-flight-details-schedule-fly-time">11h 10m</p>
+                      <p class="theme-search-results-item-flight-details-schedule-fly-time">Travel time</p>
                       <div class="theme-search-results-item-flight-details-schedule-destination">
                         <div class="theme-search-results-item-flight-details-schedule-destination-item">
                           <p class="theme-search-results-item-flight-details-schedule-destination-title">
-                            <b>CLY</b>City
+                            <b>{{route.departureAirport}}</b> {{route.departureAirportName}}
                           </p>
                           <p class="theme-search-results-item-flight-details-schedule-destination-city">
-                            London</p>
+                            {{route.departureCityName}}</p>
                         </div>
                         <div class="theme-search-results-item-flight-details-schedule-destination-separator">
                           <span>→</span>
                         </div>
                         <div class="theme-search-results-item-flight-details-schedule-destination-item">
                           <p class="theme-search-results-item-flight-details-schedule-destination-title">
-                            <b>AMS</b>Schiphol
+                            <b>{{route.arrivalAirport}}</b> {{route.arrivalAirportName}}
                           </p>
                           <p class="theme-search-results-item-flight-details-schedule-destination-city">
-                            Amsterdam</p>
+                            {{route.arrivalCityName}}</p>
                         </div>
                       </div>
                       <ul class="theme-search-results-item-flight-details-schedule-features">
                         <li>1019 Lufthansa</li>
                         <li>Wide-body jet</li>
                         <li>Boeing 777-300ER</li>
-                      </ul>
-                    </li>
-                    <li>
-                      <i class="fa fa-exchange theme-search-results-item-flight-details-schedule-icon"></i>
-                      <div class="theme-search-results-item-flight-details-schedule-dots"></div>
-                      <p class="theme-search-results-item-flight-details-schedule-date">Tue, May 17</p>
-                      <div class="theme-search-results-item-flight-details-schedule-time">
-                                      <span class="theme-search-results-item-flight-details-schedule-time-item">12:30
-                                        <span>pm</span>
-                                      </span>
-                        <span
-                          class="theme-search-results-item-flight-details-schedule-time-separator">—</span>
-                        <span class="theme-search-results-item-flight-details-schedule-time-item">02:20
-                                        <span>am</span>
-                                      </span>
-                      </div>
-                      <p class="theme-search-results-item-flight-details-schedule-fly-time">1h 50m</p>
-                      <p class="theme-search-results-item-flight-details-schedule-transfer">Change planes in
-                        Amsterdam(AMS)</p>
-                    </li>
-                    <li>
-                      <i class="fa fa-plane theme-search-results-item-flight-details-schedule-icon"></i>
-                      <div class="theme-search-results-item-flight-details-schedule-dots"></div>
-                      <p class="theme-search-results-item-flight-details-schedule-date">Tue, May 17</p>
-                      <div class="theme-search-results-item-flight-details-schedule-time">
-                                      <span class="theme-search-results-item-flight-details-schedule-time-item">02:20
-                                        <span>am</span>
-                                      </span>
-                        <span
-                          class="theme-search-results-item-flight-details-schedule-time-separator">—</span>
-                        <span class="theme-search-results-item-flight-details-schedule-time-item">08:20
-                                        <span>am</span>
-                                      </span>
-                      </div>
-                      <p class="theme-search-results-item-flight-details-schedule-fly-time">6h 0m</p>
-                      <div class="theme-search-results-item-flight-details-schedule-destination">
-                        <div class="theme-search-results-item-flight-details-schedule-destination-item">
-                          <p class="theme-search-results-item-flight-details-schedule-destination-title">
-                            <b>AMS</b>Schiphol
-                          </p>
-                          <p class="theme-search-results-item-flight-details-schedule-destination-city">
-                            Amsterdam</p>
-                        </div>
-                        <div class="theme-search-results-item-flight-details-schedule-destination-separator">
-                          <span>→</span>
-                        </div>
-                        <div class="theme-search-results-item-flight-details-schedule-destination-item">
-                          <p class="theme-search-results-item-flight-details-schedule-destination-title">
-                            <b>JFK</b>John F. Kennedy
-                          </p>
-                          <p class="theme-search-results-item-flight-details-schedule-destination-city">New
-                            York</p>
-                        </div>
-                      </div>
-                      <ul class="theme-search-results-item-flight-details-schedule-features">
-                        <li>6548 Lufthansa</li>
-                        <li>Wide-body jet</li>
-                        <li>Boeing 777-200</li>
                       </ul>
                     </li>
                   </ul>
