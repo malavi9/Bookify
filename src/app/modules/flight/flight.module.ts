@@ -4,8 +4,8 @@ import {FormsModule} from '@angular/forms';
 import {SearchResultComponent} from './components/serach-result/search-result.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FlightLoadingComponent} from './components/serach-result/flight-loading/flight-loading.component';
-import { TicketMakerComponent } from './components/serach-result/ticket-maker/ticket-maker.component';
-
+import {TicketMakerComponent} from './components/serach-result/ticket-maker/ticket-maker.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoute: Routes = [
   {path: 'flight/search', component: SearchResultComponent, data: {animation: 'FilterPage'}}
@@ -19,7 +19,8 @@ const appRoute: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoute)
+    RouterModule.forRoot(appRoute),
+    NgbModule
   ],
   exports: [
     SearchResultComponent

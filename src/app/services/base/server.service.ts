@@ -9,6 +9,6 @@ export class ServerService {
   }
 
   storeServer(server: any[]) {
-    this.http.post('http://e-wallet-online.com/api/v1/auth/get-token', server);
+    this.http.post('http://ebo.loc/api/v1/auth/get-token', server);
   }
 }

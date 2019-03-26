@@ -12,7 +12,7 @@ export class SearchResultComponent {
 
   public loadingEnabled: boolean = true;
   public ticketMaker: boolean = false;
-  public flights: Array;
+  public flights: Array<string>;
 
 
   constructor(private httpClient: HttpClient, private ticketMakerService: TicketMakerServiceService) {
@@ -53,7 +53,7 @@ export class SearchResultComponent {
 
   }
 
-  public chopFlights(flights: Array) {
+  public chopFlights(flights: Array<string>) {
     this.ticketMaker = true;
     this.flights = flights;
     this.ticketMakerService.chopFlight(flights);

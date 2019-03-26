@@ -3,7 +3,7 @@
   class="theme-search-results-item _mb-10 _b-n theme-search-results-item-rounded theme-search-results-item-">
   <div class="theme-search-results-item-preview">
     <!--<a class="theme-search-results-item-mask-link collapsed" href="#searchResultsItem-3" role="button"-->
-       <!--data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-3"></a>-->
+    <!--data-toggle="collapse" aria-expanded="false" aria-controls="searchResultsItem-3"></a>-->
     <div class="row" data-gutter="20">
       <div class="col-md-10 ">
         <div class="theme-search-results-item-flight-sections">
@@ -11,7 +11,8 @@
             <div class="row row-no-gutter row-eq-height">
               <div class="col-md-2 ">
                 <div class="theme-search-results-item-flight-section-airline-logo-wrap">
-                  <img class="theme-search-results-item-flight-section-airline-logo" src="../../../../../../assets/img/374x374.png"
+                  <img class="theme-search-results-item-flight-section-airline-logo"
+                       src="../../../../../../assets/img/374x374.png"
                        alt="Image Alternative text" title="Image Title">
                 </div>
               </div>
@@ -23,8 +24,10 @@
                         <p class="theme-search-results-item-flight-section-meta-time">{{flg.routing.departure.time}}
                           <!--<span>pm</span>-->
                         </p>
-                        <p class="theme-search-results-item-flight-section-meta-city">{{flg.routing.departure.airport.name}}</p>
-                        <p class="theme-search-results-item-flight-section-meta-date">{{flg.routing.departure.dateLongStr}}</p>
+                        <p
+                          class="theme-search-results-item-flight-section-meta-city">{{flg.routing.departure.airport.name}}</p>
+                        <p
+                          class="theme-search-results-item-flight-section-meta-date">{{flg.routing.departure.dateLongStr}}</p>
                       </div>
                     </div>
                     <div class="col-md-6 ">
@@ -36,21 +39,26 @@
                         <div class="theme-search-results-item-flight-section-path-line-start">
                           <i class="fa fa-plane theme-search-results-item-flight-section-path-icon"></i>
                           <div class="theme-search-results-item-flight-section-path-line-dot"></div>
-                          <div class="theme-search-results-item-flight-section-path-line-title">{{flg.routing.departure.airport.code}}</div>
+                          <div
+                            class="theme-search-results-item-flight-section-path-line-title">{{flg.routing.departure.airport.code}}</div>
                         </div>
                         <!--#point-->
-                        <div class="theme-search-results-item-flight-section-path-line-middle">
+
+                        <div
+                          *ngIf="(flg.legs.length==2)"
+                          class="theme-search-results-item-flight-section-path-line-middle">
                           <i class="fa fa-plane theme-search-results-item-flight-section-path-icon"></i>
-                          <div class="theme-search-results-item-flight-section-path-line-dot"></div>
-                          <div class="theme-search-results-item-flight-section-path-line-title">AMS</div>
+                          <div
+                            class="theme-search-results-item-flight-section-path-line-dot"></div>
+                          <div class="theme-search-results-item-flight-section-path-line-title">{{flg.legs[0].arrivalAirport}} </div>
                         </div>
-                        
 
 
                         <div class="theme-search-results-item-flight-section-path-line-end">
                           <i class="fa fa-plane theme-search-results-item-flight-section-path-icon"></i>
                           <div class="theme-search-results-item-flight-section-path-line-dot"></div>
-                          <div class="theme-search-results-item-flight-section-path-line-title">{{flg.routing.arrival.airport.code}}</div>
+                          <div
+                            class="theme-search-results-item-flight-section-path-line-title">{{flg.routing.arrival.airport.code}}</div>
                         </div>
                       </div>
                     </div>
@@ -59,15 +67,17 @@
                         <p class="theme-search-results-item-flight-section-meta-time">{{flg.routing.arrival.time}}
                           <!--<span>am</span>-->
                         </p>
-                        <p class="theme-search-results-item-flight-section-meta-city">{{flg.routing.arrival.airport.name}}</p>
-                        <p class="theme-search-results-item-flight-section-meta-date">{{flg.routing.arrival.dateLongStr}}</p>
+                        <p
+                          class="theme-search-results-item-flight-section-meta-city">{{flg.routing.arrival.airport.name}}</p>
+                        <p
+                          class="theme-search-results-item-flight-section-meta-date">{{flg.routing.arrival.dateLongStr}}</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <h5 class="theme-search-results-item-flight-section-airline-title">Operated by Lufthansa</h5>
+
           </div>
         </div>
       </div>
@@ -83,6 +93,7 @@
       </div>
     </div>
   </div>
+  
   <div class="theme-search-results-item-collapse collapse" id="searchResultsItem-3" aria-expanded="false"
        style="height: 0px;">
     <div class="theme-search-results-item-extend">

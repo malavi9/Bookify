@@ -6,8 +6,8 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./ticket-maker.component.scss']
 })
 export class TicketMakerComponent implements OnInit {
-  @Input() Flights: Array;
-  public flight: Array;
+  @Input() Flights: Array<string>;
+  public flight: Array<string>;
 
   constructor() {
   }

@@ -8,6 +8,6 @@ export class TicketMakerServiceService {
   constructor() {
   }
 
-  public chopFlight(flight: Array) {
+  public chopFlight(flight: Array<string>) {
   }
 }
