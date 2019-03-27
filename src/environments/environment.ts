@@ -1,9 +1,20 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+const apiAddress: string = 'http://ebo.loc/api/v1/';
 export const environment = {
-  production: false
+  production: false,
+  app: {
+    title: 'MyBooking',
+    language: 'en',
+    version: 3.0
+  },
+  api: {
+    flight: {
+      search: apiAddress + 'flight/search',
+      airport: ''
+    }
+  },
 };
 
 /*

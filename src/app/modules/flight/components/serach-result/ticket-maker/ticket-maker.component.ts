@@ -15,7 +15,6 @@ export class TicketMakerComponent implements OnInit {
 
   ngOnInit(): void {
     this.flight = this.Flights;
-    console.log(this.Flights);
   }
 
 

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TicketMakerServiceService} from '../../../../services/flight/ticket-maker-service/ticket-maker-service.service';
+import {HttpService} from '../../../../services/flight/http/http.service';
+import {environment} from '../../../../../environments/environment';
+
 
 @Component({
   selector: 'app-search-result',
@@ -14,9 +16,9 @@ export class SearchResultComponent {
   public loadingEnabled: boolean = true;
   public ticketMaker: boolean = false;
   public flights: Array<string>;
+  public flightResponse: string;
 
-
-  constructor(private httpClient: HttpClient, private ticketMakerService: TicketMakerServiceService) {
+  constructor(private HttpService: HttpService, private ticketMakerService: TicketMakerServiceService) {
 
   }
 
@@ -25,12 +27,11 @@ export class SearchResultComponent {
   }
 
   ngOnInit() {
-    console.log('te');
     this.getData();
   }
 
   public getData() {
-    const headers = new HttpHeaders({'content-type': 'application/json; charset=utf8'});
+
     let body = JSON.stringify({
       request_id: '',
       params: {
@@ -41,16 +42,24 @@ export class SearchResultComponent {
         }
       }
     });
-
-
-    this.httpClient.post('http://ebo.loc/api/v1/flight/search', body, {headers: headers})
-      .subscribe((data: any) => {
-        if (data['output']) {
-          if (data['output']['count'] > 0) {
-            this.chopFlights(data['output']['flights']);
+    this.HttpService.post(environment.api.flight.search , body)
+      .subscribe((data: object) => {
+        // console.log(data);
+        if (data.output) {
+          if (data.output.count > 0) {
+            this.chopFlights(data.output.flights);
           }
         }
       });
+    // this.flightResponse = this.HttpService.post('http://ebo.loc/api/v1/flight/search', body);
+    // console.log(this.flightResponse);
+    // if (this.flightResponse.output) {
+    //   console.log('te');
+    // if (this.flightResponse['output']['count'] > 0) {
+    //   this.chopFlights(this.flightResponse['output']['flights']);
+    // }
+    // }
+
 
   }
 
